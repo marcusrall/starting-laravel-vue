@@ -24,6 +24,7 @@ Vue.use(VueRouter);
 import Users from './components/Users.vue';
 import Example from './components/Example.vue';
 
+
 const router = new VueRouter({
     hashbang: false,
     base: __dirname,

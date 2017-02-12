@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('photo')->latest()->orderBy('created_at', 'desc')->get();
         return response()->json([
           'users' => $users
         ]);

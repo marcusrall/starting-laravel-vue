@@ -3,12 +3,18 @@
         <table class="table table-striped table-bordered">
           <thead>
             <tr>
+              <th>
+                #
+              </th>
               <th>Username</th>
               <th>Email</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="user in users">
+              <td>
+                <img :src="user.photo ? user.photo.file: 'images/default-profile.png' " alt="" width="40px" />
+              </td>
               <td>
                 {{user.name}}
               </td>
