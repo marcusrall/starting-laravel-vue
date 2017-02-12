@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="">
-        <table>
+        <table class="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Username</th>
@@ -10,10 +10,10 @@
           <tbody>
             <tr v-for="user in users">
               <td>
-                {{User.name}}
+                {{user.name}}
               </td>
               <td>
-                {{User.email}}
+                {{user.email}}
               </td>
             </tr>
           </tbody>
@@ -35,7 +35,8 @@ export default {
     methods:{
       fetchUsers(){
         this.$http.get('api/users').then(response => {
-          this.users = response.data.users;
+           this.users = response.data.users
+          // console.log(response.body.users);
         })
       }
     }
