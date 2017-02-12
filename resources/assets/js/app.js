@@ -23,6 +23,8 @@ Vue.use(VueRouter);
 
 import Users from './components/Users.vue';
 import Example from './components/Example.vue';
+import CreateUser from './components/CreateUser.vue';
+
 
 
 const router = new VueRouter({
@@ -31,7 +33,9 @@ const router = new VueRouter({
     linkActiveClass: 'active',
 
     routes:[
-      {path: '/', component: Users, name: 'users'}
+      {path: '/', component: Users, name: 'users'},
+      {path: '/create', component: CreateUser, name: 'create'}
+
     ]
 });
 

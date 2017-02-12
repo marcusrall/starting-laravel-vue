@@ -14,6 +14,7 @@
             <tr v-for="user in users">
               <td>
                 <img :src="user.photo ? user.photo.file: 'images/default-profile.png' " alt="" width="40px" />
+
               </td>
               <td>
                 {{user.name}}
@@ -42,7 +43,7 @@ export default {
       fetchUsers(){
         this.$http.get('api/users').then(response => {
            this.users = response.data.users
-          // console.log(response.body.users);
+           console.log(response.data.users);
         })
       }
     }
