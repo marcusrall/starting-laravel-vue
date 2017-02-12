@@ -7,14 +7,31 @@
 
 require('./bootstrap');
 
+var Vue = require('vue');
+var VueRouter = require('vue-router');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
 
-const app = new Vue({
-    el: '#app'
+Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
+Vue.use(VueRouter);
+
+
+import Users from './components/Users.vue';
+import Example from './components/Example.vue';
+
+const router = new VueRouter({
+    hashbang: false,
+    base: __dirname,
+    linkActiveClass: 'active',
+
+    routes:[
+      {path: '/', component: Users, name: 'users'}
+    ]
 });
+
+new Vue(Vue.util.extend({router}, Example)).$mount('#app')
