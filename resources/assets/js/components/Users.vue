@@ -8,14 +8,17 @@
               </th>
               <th>Username</th>
               <th>Email</th>
+            
             </tr>
           </thead>
+
           <tbody>
             <tr v-for="user in users">
               <td>
-                <img :src="user.photo ? user.photo.file: 'images/default-profile.png' " alt="" width="40px" />
+                <img :src="user.photo ? 'images/'+user.photo.file : '/images/default-profile.png' " alt="" width="40px" />
 
               </td>
+
               <td>
                 {{user.name}}
               </td>
@@ -43,7 +46,7 @@ export default {
       fetchUsers(){
         this.$http.get('api/users').then(response => {
            this.users = response.data.users
-           console.log(response.data.users);
+          //  console.log(response.data.users);
         })
       }
     }
