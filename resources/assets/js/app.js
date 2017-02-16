@@ -24,6 +24,7 @@ Vue.use(VueRouter);
 import Users from './components/Users.vue';
 import Example from './components/Example.vue';
 import CreateUser from './components/CreateUser.vue';
+import EditUser from './components/EditUser.vue';
 
 
 
@@ -34,7 +35,9 @@ const router = new VueRouter({
 
     routes:[
       {path: '/', component: Users, name: 'users'},
-      {path: '/create', component: CreateUser, name: 'create'}
+      {path: '/create', component: CreateUser, name: 'create'},
+      {path: '/user/:id/edit', component: EditUser},
+
 
     ]
 });

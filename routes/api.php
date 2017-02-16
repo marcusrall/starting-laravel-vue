@@ -20,6 +20,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::resource('users', 'UserController');
+Route::post('users/{user}', 'UserController@edits')->name('user.edits');
+Route::post('user/destroy', 'UserController@destroy')->name('user.destroy');
+
 
 Route::post('submit', function(Request $request){
 
@@ -28,7 +31,7 @@ Route::post('submit', function(Request $request){
     }else{
       $input = $request->all();
     }
-    
+
     if($file = $request->file('image')){
       $name = time() . $file->getClientOriginalName();
       $file->move('images', $name);

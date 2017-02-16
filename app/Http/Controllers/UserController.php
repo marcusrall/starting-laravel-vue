@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Photo;
 
 class UserController extends Controller
 {
@@ -38,7 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -49,7 +50,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::findOrfail($id);
     }
 
     /**
@@ -58,9 +59,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -72,7 +73,64 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrfail($id);
+
+
+        if(trim($request->password) == ''){
+          $input = $request->except('password');
+        }else{
+          $input = $request->all();
+        }
+
+        if($file = $request->file('image')){
+          $name = time() . $file->getClientOriginalName();
+          $file->move('images', $name);
+          $photo = Photo::create(['file' => $name]);
+          $input['photo_id'] = $photo->id;
+        }
+
+        $input['password'] = bcrypt($request->password);
+
+        //dd($input);
+        $user->update($request->all());
+
+        return response()->json([
+          'success' => true,
+          'message' => "User updated",
+          'user' => $user,
+          'request' => $input
+        ]);
+    }
+
+    public function edits(Request $request, $id)
+    {
+        $user = User::findOrfail($id);
+
+
+        if(trim($request->password) == ''){
+          $input = $request->except('password');
+        }else{
+          $input = $request->all();
+        }
+
+        if($file = $request->file('image')){
+          $name = time() . $file->getClientOriginalName();
+          $file->move('images', $name);
+          $photo = Photo::create(['file' => $name]);
+          $input['photo_id'] = $photo->id;
+        }
+
+        $input['password'] = bcrypt($request->password);
+
+        //dd($input);
+        $user->update($input);
+
+        return response()->json([
+          'success' => true,
+          'message' => "User updated",
+          'user' => $user,
+          'request' => $input
+        ]);
     }
 
     /**
@@ -81,8 +139,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id = null)
     {
-        //
+      if ($request->id){
+        foreach ($request->id as $id) {
+            User::destroy($id);
+        }
+      }
     }
+
+
 }
