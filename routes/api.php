@@ -21,7 +21,7 @@ Route::get('/user', function (Request $request) {
 
 Route::resource('users', 'UserController');
 Route::post('users/{user}', 'UserController@edits')->name('user.edits');
-Route::post('user/destroy', 'UserController@destroy')->name('user.destroy');
+Route::post('user/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
 
 
 Route::post('submit', function(Request $request){

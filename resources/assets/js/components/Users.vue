@@ -15,6 +15,7 @@
                     </th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th></th>
 
                   </tr>
                 </thead>
@@ -33,7 +34,11 @@
                     <td>
                       {{user.email}}
                     </td>
-                  
+                    <td>
+                      <router-link class="btn btn-default" v-bind:to="'/user/'+ user.id ">View</router-link>
+
+                      <router-link class="btn btn-info" v-bind:to="'/user/'+ user.id +'/edit'">Editar</router-link>
+                    </td>
                   </tr>
                 </tbody>
               </table>
