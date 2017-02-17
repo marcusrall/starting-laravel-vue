@@ -43,7 +43,7 @@ Route::post('submit', function(Request $request){
 
     return response()->json([
       'success' => true,
-      'menssage' => 'images uploaded'
+      'message' => 'Usuario criado com sucesso'
     ]);
 
 })->name('submit');

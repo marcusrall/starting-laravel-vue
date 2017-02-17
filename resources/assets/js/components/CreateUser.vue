@@ -64,9 +64,8 @@ export default {
         var formdata = new FormData(form);
         this.$http.post('api/submit', formdata)
           .then((response) => {
-              //sucesso
-              console.log(response);
-              this.$router.push({path: '/', query: {alert: 'User create'}})
+            
+              this.$router.push({path: '/', query: { alert: response.body.message}})
           }, (response) => {
             //error
             console.log('Error'+response);

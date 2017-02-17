@@ -127,7 +127,7 @@ class UserController extends Controller
 
         return response()->json([
           'success' => true,
-          'message' => "User updated",
+          'message' => "Atualizado com sucesso!",
           'user' => $user,
           'request' => $input
         ]);

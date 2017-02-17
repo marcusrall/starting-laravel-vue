@@ -76,7 +76,7 @@ export default {
 
       this.$http.post('api/users/' + this.$route.params.id, formdata)
       .then((response) => {
-        this.$router.push({path: '/', query: {alert: response.message }})
+        this.$router.push({path: '/', query: {alert: response.body.message }})
       }, (response) => {
         console.log('error callback - Editar');
       });

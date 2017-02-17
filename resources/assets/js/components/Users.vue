@@ -1,4 +1,6 @@
 <template lang="html">
+  <div class="">
+    <Alert  v-if="alert != ''" v-bind:message="alert" />
     <div class="panel panel-default user-index">
 
         <div class="panel-heading">Lista de Usuarios</div>
@@ -44,13 +46,17 @@
               </table>
             </div>
     </div>
+
+  </div>
 </template>
 
 <script>
+import Alert from './Alert.vue';
 export default {
     data(){
       return{
         users: [],
+        alert: '',
         checkedNames: [],
         user:{
           complete: false
@@ -76,7 +82,13 @@ export default {
       }
     },
     created(){
-        this.fetchUsers();
+
+      if(this.$route.query.alert){
+        this.alert = this.$route.query.alert;
+      }
+      console.log(this.$route.query.alert);
+      console.log(this.alert);
+      this.fetchUsers();
     },
     methods:{
       fetchUsers(){
@@ -94,7 +106,11 @@ export default {
           // error de callback
         });
       }
+    },
+    components:{
+      Alert
     }
+
 }
 </script>
 
